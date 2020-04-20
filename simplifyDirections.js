@@ -1,6 +1,26 @@
 // Please do not change the name of this function
 const simplifyDirections = (directions) => {
-  // Your code here
-}
+  const opposites = {
+    NORTH: "SOUTH",
+    SOUTH: "NORTH",
+    EAST: "WEST",
+    WEST: "EAST",
+  };
 
-module.exports = { simplifyDirections }
+  const newDirections = [];
+
+  for (let direction in opposites) {
+    let numberOfStepsInDirection =
+      directions.filter((step) => step === direction).length -
+      directions.filter((step) => step === opposites[direction]).length;
+    if (numberOfStepsInDirection > 0) {
+      for (let i = 0; i < numberOfStepsInDirection; i++) {
+        newDirections.push(direction);
+      }
+    }
+  }
+
+  return newDirections;
+};
+
+module.exports = { simplifyDirections };
